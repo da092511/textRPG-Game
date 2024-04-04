@@ -63,6 +63,9 @@ public abstract class Unit {
 	}
 	
 	public void setFaintTurn() {
+		if(this.faintTurn == 0)
+			return;
+		
 		this.faintTurn --;
 	}
 	
