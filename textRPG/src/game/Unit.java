@@ -17,7 +17,7 @@ public class Unit {
 			return;
 		
 		int hp = target.getCurHp() - this.power;
-		
+		target.setCurHp(hp);
 	}
 	
 	
