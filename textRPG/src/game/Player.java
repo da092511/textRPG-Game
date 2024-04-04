@@ -2,6 +2,7 @@ package game;
 
 public class Player extends Unit{
 	private int code;
+	private String name ;
 	
 	private int money;
 	
@@ -11,17 +12,15 @@ public class Player extends Unit{
 	public Player() {
 		
 	}
-	
-	public Player(int code) {
+
+	public Player(int code, String name) {
 		this.code = code;
+		this.name = name;
 	}
 	
 	public int getCode() {
 		return this.code;
 	}
 	
-	public void setCode(int code) {
-		this.code = code;
-	}
 	
 }
