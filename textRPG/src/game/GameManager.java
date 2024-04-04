@@ -2,11 +2,14 @@ package game;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class GameManager {
+	public static Scanner scan = new Scanner(System.in);
+	
 	private Map <String, Stage> stageList = new HashMap<>();
 	private String curStage;
-	public String nextStage;
+	public static String nextStage;
 	
 	public GameManager() {
 		stageList.put("Title", new StageTitle());
@@ -17,16 +20,18 @@ public class GameManager {
 	}
 
 	public boolean update() {
-		if(curStage.equals(nextStage)) {
-			return true;
-		}
-		
 		curStage = nextStage;
 		
 		Stage stage = stageList.get(curStage);
 		stage.init(); //초기화
 		
-		stage.update();
+		boolean run  = true;
+		while(true) {
+			run = stage.update();
+			
+			if(!run)
+				break;
+		}
 		
 		if(nextStage.equals(""))
 			return false; 
