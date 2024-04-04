@@ -6,6 +6,9 @@ import java.util.Vector;
 public class StageBattle extends Stage{
 	private Random ran = new Random();
 	
+	private final int PLAYER = 1;
+	private final int MONSTER = 2;
+	
 	Vector<Player> party;
 	Vector<Monster> monsterList;
 	
@@ -14,7 +17,6 @@ public class StageBattle extends Stage{
 	
 	private int mDead;
 	private int mIdx;
-	
 	
 	private void playerSkill(Unit unit) {
 		if(unit instanceof Warrior) {
@@ -41,7 +43,7 @@ public class StageBattle extends Stage{
 			System.out.println("[1.공격] [2. 스킬]");
 			int option = inputNumber();
 			
-			if(option == 1) {
+			if(option == 1 || option == 2 && unit.getSkilInterval() > 0) {
 				int rIdx = ran.nextInt(monsterList.size());
 				
 				Unit target = monsterList.get(rIdx);
@@ -77,6 +79,21 @@ public class StageBattle extends Stage{
 		
 	}
 	
+	private void setCount(int type) {
+		if(type == PLAYER) {
+			for(Player player : party) {
+				player.setFaintTurn();
+				player.setSkillInterval();
+			}
+		}
+		else if(type == MONSTER) {
+			for(Monster monster : monsterList) {
+				monster.setFaintTurn();
+				monster.setSkillInterval();
+			}
+		}
+	}
+	
 	private void checkPlayer() {
 		int cnt = party.size();
 		
@@ -90,7 +107,6 @@ public class StageBattle extends Stage{
 	public boolean update() {
 		boolean run = true;
 		boolean turn = true;
-		
 		
 		while(run) {
 			if(turn) {
