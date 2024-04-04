@@ -19,14 +19,14 @@ public class StageBattle extends Stage{
 	private int mIdx;
 	
 	private void playerSkill(Unit unit) {
-		if(unit instanceof Warrior) {
-			Warrior w = (Warrior) unit;
+		if(unit instanceof PWarrior) {
+			PWarrior w = (PWarrior) unit;
 			
-		}else if(unit instanceof Witch) {
-			Witch w = (Witch) unit;
+		}else if(unit instanceof PWitch) {
+			PWitch w = (PWitch) unit;
 			
-		}else if(unit instanceof Hiller) {
-			Hiller h = (Hiller) unit;
+		}else if(unit instanceof PHiller) {
+			PHiller h = (PHiller) unit;
 		}
 	}
 	
@@ -74,8 +74,29 @@ public class StageBattle extends Stage{
 		return number;
 	}
 	
+	private void monsterSkill(Unit unit) {
+		if(unit instanceof MOrc) {
+			
+		}
+		else if(unit instanceof MWolf) {
+			
+		}
+		else if(unit instanceof MBat) {
+			
+		}
+	}
+	
 	private void monsterAttack(Unit unit) {
+		int attack = ran.nextInt(20);
 		
+		if(attack != 1 || attack == 1 && unit.getSkilInterval() > 0) {
+			int index = ran.nextInt(party.size());
+			
+			unit.attack(party.get(index));
+		}
+		else if(attack == 1) {
+		//	monsterSkill(unit);
+		}
 		
 	}
 	
