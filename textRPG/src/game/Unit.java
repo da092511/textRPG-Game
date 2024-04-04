@@ -16,7 +16,8 @@ public class Unit {
 		if(target.getIsDead())
 			return;
 		
-		//int hp = target.getCurHp() - this.power;
+		int hp = target.getCurHp() - this.power;
+		
 	}
 	
 	
@@ -30,6 +31,10 @@ public class Unit {
 	
 	public int getCurHp() {
 		return this.curHp;
+	}
+	
+	public void setCurHp(int curHp) {
+		this.curHp = curHp;
 	}
 	
 	
