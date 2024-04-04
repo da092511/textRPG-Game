@@ -72,6 +72,11 @@ public class StageBattle extends Stage{
 		return number;
 	}
 	
+	private void monsterAttack(Unit unit) {
+		
+		
+	}
+	
 	@Override
 	public boolean update() {
 		boolean run = true;
@@ -79,7 +84,6 @@ public class StageBattle extends Stage{
 		
 		
 		while(run) {
-			
 			if(turn) {
 				Player player = party.get(pIdx);
 				
@@ -91,10 +95,19 @@ public class StageBattle extends Stage{
 				if(!playerAttack(player))
 					continue;
 				
-				
+				turn = !turn;
 			}
 			else {
+				Monster m = monsterList.get(mIdx);
 				
+				mIdx ++;
+				
+				monsterAttack(m);
+				
+				if(mIdx == monsterList.size()) {
+					turn = !turn;
+					mIdx = 0;
+				}
 			}
 			
 			if(pDead == 0)
