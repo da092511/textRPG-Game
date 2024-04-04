@@ -50,6 +50,10 @@ public abstract class Unit {
 		this.curHp = curHp;
 	}
 	
+	public int getMaxHp() {
+		return this.maxHp;
+	}
+	
 	public void isFaint(int faintTurn) {
 		this.faintTurn = faintTurn;
 	}
