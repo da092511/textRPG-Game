@@ -10,6 +10,10 @@ public class GameManager {
 	
 	public GameManager() {
 		stageList.put("Title", new StageTitle());
+		stageList.put("Lobby", new StageLobby());
+		stageList.put("Battle", new StageBattle());
+		
+		nextStage = "Title";
 	}
 
 	public boolean update() {
