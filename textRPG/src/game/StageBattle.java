@@ -77,6 +77,15 @@ public class StageBattle extends Stage{
 		
 	}
 	
+	private void checkPlayer() {
+		int cnt = party.size();
+		
+		for(Unit unit : party) {
+			if(unit.getCurHp() == 0)
+				cnt--;
+		}
+	}
+	
 	@Override
 	public boolean update() {
 		boolean run = true;
@@ -113,6 +122,7 @@ public class StageBattle extends Stage{
 			if(pDead == 0)
 				GameManager.nextStage = "";
 			
+			checkPlayer();
 			if(pDead <= 0 || mDead <= 0)
 				run = false;
 		}
