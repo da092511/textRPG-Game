@@ -32,6 +32,14 @@ public class Player extends Unit{
 			Warrior w = (Warrior) this;
 			w.skill(unit);
 		}
+		else if(this instanceof Witch) { 
+			Witch w = (Witch) this;
+			w.skill(unit);
+		}
+		else if(this instanceof Hiller) { 
+			Hiller h = (Hiller) this;
+			h.skill(unit);
+		}
 	}
 	
 }
