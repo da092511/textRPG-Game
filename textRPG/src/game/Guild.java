@@ -1,10 +1,14 @@
 package game;
 
-public class Guild {
+import java.util.Vector;
 
-	public static int code;
+public class Guild {
+	private Vector<Player> guildMember = new Vector<>();
+	 
 	
-	public int getCode() {
-		return this.code;
+	public void run() {
+		
 	}
+	
+	
 }
