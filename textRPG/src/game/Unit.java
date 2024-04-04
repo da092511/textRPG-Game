@@ -12,10 +12,25 @@ public class Unit {
 	private int faintTurn ;
 	
 	
-	
-	
 	public void attack(Unit target) {
+		if(target.getIsDead())
+			return;
 		
+		//int hp = target.getCurHp() - this.power;
 	}
+	
+	
+	public void isDead() {
+		this.isDead = true;
+	}
+	
+	public boolean getIsDead() {
+		return this.isDead;
+	}
+	
+	public int getCurHp() {
+		return this.curHp;
+	}
+	
 	
 }
