@@ -30,6 +30,9 @@ public abstract class Unit {
 		target.setCurHp(hp);
 	}
 	
+	public String getName() {
+		return this.name;
+	}
 	
 	public void isDead() {
 		this.isDead = true;
