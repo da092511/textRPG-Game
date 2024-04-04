@@ -1,6 +1,7 @@
 package game;
 
-public class Unit {
+public abstract class Unit {
+	private String name;
 	
 	private int maxHp;
 	private int curHp;
@@ -11,6 +12,15 @@ public class Unit {
 	private boolean isFaint;
 	private int faintTurn ;
 	
+	public Unit() {
+		
+	}
+	
+	public Unit(String name, int hp, int power) {
+		this.name = name;
+		this.curHp = hp;
+		this.power = power;
+	}
 	
 	public void attack(Unit target) {
 		if(target.getIsDead())
@@ -36,6 +46,8 @@ public class Unit {
 	public void setCurHp(int curHp) {
 		this.curHp = curHp;
 	}
+	
+	public abstract void skill(Unit unit);
 	
 	
 }
