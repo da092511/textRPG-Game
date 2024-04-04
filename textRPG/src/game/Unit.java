@@ -71,6 +71,9 @@ public abstract class Unit {
 	}
 	
 	public void setSkillInterval() {
+		if(this.skillInterval == 0)
+			return;
+		
 		this.skillInterval --;
 	}
 	
