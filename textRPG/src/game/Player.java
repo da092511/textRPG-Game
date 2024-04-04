@@ -2,7 +2,7 @@ package game;
 
 public class Player extends Unit{
 	private int code;
-	private String name ;
+	private String name;
 	
 	private int money;
 	
@@ -10,17 +10,24 @@ public class Player extends Unit{
 	public static Guild guild = new Guild();
 	
 	public Player() {
-		
-	}
-
-	public Player(int code, String name) {
-		this.code = code;
-		this.name = name;
+		money = 100000;
+		guild.setGuild();
 	}
 	
 	public int getCode() {
 		return this.code;
 	}
 	
+	public void init() {
+		
+	}
+	
+	@Override
+	public void skill(Unit unit) {
+		if(this instanceof Warrior) { 
+			Warrior w = (Warrior) this;
+			w.skill(unit);
+		}
+	}
 	
 }
