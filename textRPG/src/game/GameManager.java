@@ -26,14 +26,11 @@ public class GameManager {
 		Stage stage = stageList.get(curStage);
 		stage.init(); //초기화
 		
-		while(true) {
-			boolean run = stage.update();
-			
-			if(nextStage.equals(""))
-				return false;
-			
-			break;
-		}
+		stage.update();
+		
+		if(nextStage.equals(""))
+			return false; 
+		
 		return true;
 	}
 }
