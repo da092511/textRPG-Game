@@ -10,4 +10,18 @@ public class StageSetting extends Stage{
 	public boolean update() {
 		return false;
 	}
+	
+	private int inputNumber() {
+		int number = -1;
+		System.out.print(": ");
+		
+		try {
+			String input = GameManager.scan.next();
+			number = Integer.parseInt(input);
+		} catch (Exception e) {
+			System.err.println("숫자만 입력");
+		}
+		
+		return number;
+	}
 }
