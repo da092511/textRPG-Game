@@ -14,6 +14,10 @@ public class Player extends Unit{
 		guild.setGuild();
 	}
 	
+	public Player(String name, int hp, int power) {
+		super(name,hp,power);
+	}
+	
 	public int getCode() {
 		return this.code;
 	}
