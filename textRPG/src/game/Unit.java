@@ -9,8 +9,8 @@ public abstract class Unit {
 	
 	private boolean isDead;
 	
-	private boolean isFaint;
-	private int faintTurn ;
+	private int faintTurn;
+	private int skillInterval;
 	
 	public Unit() {
 		
@@ -45,6 +45,26 @@ public abstract class Unit {
 	
 	public void setCurHp(int curHp) {
 		this.curHp = curHp;
+	}
+	
+	public void isFaint(int faintTurn) {
+		this.faintTurn = faintTurn;
+	}
+	
+	public int getLeftFaint() {
+		return this.faintTurn;
+	}
+	
+	public void setFaintTurn() {
+		this.faintTurn --;
+	}
+	
+	public int getSkilInterval() {
+		return skillInterval;
+	}
+	
+	public void setSkillInterval() {
+		this.skillInterval --;
 	}
 	
 	public abstract void skill(Unit unit);
