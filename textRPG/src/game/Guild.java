@@ -31,7 +31,7 @@ public class Guild {
 		}
 		
 		// 파티 참여 여부
-		for (int i = 0; i < PARTY_SIZE; i++) {
+		for (int i = 0; i < partyList.size(); i++) {
 			guildList.get(i).party = true;
 		}
 
@@ -102,8 +102,46 @@ public class Guild {
 		guildList.remove(index);
 	}
 	
+	private void printParty() {
+		int n = 1;
+		System.out.println("========현재 파티=======");
+		for(Player p : partyList) {
+			System.out.println(n + ". " + p);
+			n++;
+		}
+	}
+	
 	private void changeParty() {
+		if(partyList == null)
+			return;
 		
+		printParty();
+		System.out.print("교체될 플레이어 번호 : ");
+		int outIdx = GameManager.inputNumber()-1;
+		
+		if(outIdx < 0 || outIdx >= partyList.size())
+			return;
+		
+		printGuild();
+		System.out.print("교체할 플레이어 번호");
+		int inIdx = GameManager.inputNumber()-1;
+		
+		if(inIdx < 0 || inIdx >= guildList.size() || guildList.get(inIdx).party)
+			return;
+		partyList.get(outIdx).party = false;
+		guildList.get(inIdx).party = true;
+		
+	}
+	
+	private void addParty() {
+		printGuild();
+		System.out.print("파티에 추가할 플레이어 번호");
+		int index = GameManager.inputNumber()-1;
+		
+		if(index < 0 || index >= guildList.size() || guildList.get(index).party)
+			return;
+		
+		guildList.get(index).party = true;
 	}
 	
 	public void run() {
@@ -115,12 +153,15 @@ public class Guild {
 			else if(option == 2)
 				buyUnit();
 			else if(option == 3)
-				delectUnit();
+				addParty();
 			else if(option == 4)
+				delectUnit();
+			else if(option == 5)
 				changeParty();
 			else if(option == 0)
 				break;
 			
+			setGuild();
 		}
 	}
 	
