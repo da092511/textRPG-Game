@@ -25,4 +25,22 @@ public class Item {
 		return new Item(this.kind, this.name, this.price, this.power);
 	}
 	
+	public String getName() {
+		return this.name;
+	}
+	
+	public int getKind() {
+		return this.kind;
+	}
+	
+	@Override
+	public String toString() {
+		String info = "";
+				
+		info += this.name + "\n";
+		info +="Price:" + this.power + "G / pw:" + this.power;
+		
+		return info;
+	}
+	
 }
