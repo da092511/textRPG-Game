@@ -11,6 +11,9 @@ public class Guild {
 	
 	public static Vector<Player> partyList = new Vector<>();
 	
+	private String path = "game.";
+	private String[] type = {"Warrior", "Witch", "Hiller"};
+	
 	public Guild() {
 		
 	}
@@ -59,19 +62,44 @@ public class Guild {
 		name += name3[rIdx];
 		
 		//레벨
-		
+		int level = ran.nextInt(5)+1;
 		//hp
-		
+		int maxHp = 80 * level;
 		//power
+		int power = 40 + 5 * level;
 		
-		//
-		
+		int def = 0; //방어
+		int exp = 0;
+		rIdx = ran.nextInt(3);
+		try {
+			Class<?> clazz = Class.forName(path+type[rIdx]);
+			Object obj = clazz.getConstructor().newInstance();
+			Player p = (Player) obj;
+			p = new Player(name, level, maxHp, power, def, exp);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void printGuild() {
+		int n = 1;
+		
 		for(Player p : guildList) {
+			System.out.print(n + ". ");
 			System.out.println(p);
+			n++;
 		}
+	}
+	
+	private void delectUnit() {
+		printGuild();
+		System.out.println("삭제할 유저 번호");
+		int index = GameManager.inputNumber()-1;
+		
+		if(index < 0 || index >= guildList.size())
+			return;
+		
+		guildList.remove(index);
 	}
 	
 	public void run() {
@@ -82,8 +110,8 @@ public class Guild {
 				printGuild();
 			else if(option == 2)
 				buyUnit();
-	//		else if(option == 3)
-	//			delectUnit();
+			else if(option == 3)
+				delectUnit();
 	//		else if(option == 4)
 	//			changeUnit();
 			else if(option == 0)
