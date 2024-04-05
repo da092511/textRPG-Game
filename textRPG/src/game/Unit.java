@@ -34,6 +34,10 @@ public abstract class Unit {
 		return this.name;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public void isDead() {
 		this.isDead = true;
 	}
