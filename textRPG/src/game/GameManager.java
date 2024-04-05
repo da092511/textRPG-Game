@@ -15,8 +15,21 @@ public class GameManager {
 		stageList.put("Title", new StageTitle());
 		stageList.put("Lobby", new StageLobby());
 		stageList.put("Battle", new StageBattle());
+		stageList.put("Setting", new StageSetting());
 		
 		nextStage = "Title";
+	}
+	
+	public int inputNumber() {
+		int number = -1;
+		try {
+			String input = scan.next();
+			number = Integer.parseInt(input);
+		} catch (Exception e) {
+			System.out.println("only number");
+		}
+		
+		return number;
 	}
 
 	public boolean update() {
