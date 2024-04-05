@@ -102,6 +102,10 @@ public class Guild {
 		guildList.remove(index);
 	}
 	
+	private void changeParty() {
+		
+	}
+	
 	public void run() {
 		while(true) {
 			guildMenu();
@@ -112,8 +116,8 @@ public class Guild {
 				buyUnit();
 			else if(option == 3)
 				delectUnit();
-	//		else if(option == 4)
-	//			changeUnit();
+			else if(option == 4)
+				changeParty();
 			else if(option == 0)
 				break;
 			
