@@ -20,7 +20,7 @@ public class GameManager {
 		nextStage = "Title";
 	}
 	
-	public int inputNumber() {
+	public static int inputNumber() {
 		int number = -1;
 		try {
 			String input = scan.next();
