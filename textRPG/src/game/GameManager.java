@@ -41,7 +41,6 @@ public class GameManager {
 		boolean run  = true;
 		while(true) {
 			run = stage.update();
-			
 			if(!run)
 				break;
 		}
