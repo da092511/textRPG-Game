@@ -6,12 +6,11 @@ import java.util.Vector;
 public class StageBattle extends Stage{
 	private Random ran = new Random();
 	
-	private UnitManager um = null;
+	private UnitManager um ;
 	
 	private final int PLAYER = 1;
 	private final int MONSTER = 2;
 	
-	Player p = null;
 	Vector<Player> party;
 	Vector<Monster> monsterList;
 	
@@ -30,12 +29,18 @@ public class StageBattle extends Stage{
 	private void playerSkill(Unit unit) {
 		if(unit instanceof PWarrior) {
 			PWarrior w = (PWarrior) unit;
+			for(Monster mon : monsterList)
+				w.skill(mon);
 			
 		}else if(unit instanceof PWitch) {
 			PWitch w = (PWitch) unit;
+			for(Monster mon : monsterList)
+				w.skill(mon);
 			
 		}else if(unit instanceof PHiller) {
 			PHiller h = (PHiller) unit;
+			for(Player p : party)
+				h.skill(p);
 		}
 	}
 	
@@ -48,7 +53,9 @@ public class StageBattle extends Stage{
 			return true;
 		}
 		
+		printBattle();
 		while(true) {
+			System.out.print(party.get(pIdx).getName() + " ");
 			System.out.println("[1.공격] [2. 스킬]");
 			int option = inputNumber();
 			
@@ -85,13 +92,21 @@ public class StageBattle extends Stage{
 	
 	private void monsterSkill(Unit unit) {
 		if(unit instanceof MOrc) {
+			int rIdx = ran.nextInt(3);
 			
+			MOrc orc = (MOrc) unit;
+			orc.skill(party.get(rIdx));
 		}
 		else if(unit instanceof MWolf) {
-			
+			MWolf wolf = (MWolf) unit;
+			for(Player p : party)
+				wolf.skill(p);
 		}
 		else if(unit instanceof MBat) {
+			int rIdx = ran.nextInt(3);
 			
+			MBat bat = (MBat) unit;
+			bat.skill(party.get(rIdx));
 		}
 	}
 	
@@ -128,22 +143,56 @@ public class StageBattle extends Stage{
 		int cnt = party.size();
 		
 		for(Unit unit : party) {
-			if(unit.getCurHp() == 0)
+			if(unit.getCurHp() <= 0)
 				cnt--;
 		}
+		pDead = cnt;
+		
+		cnt = monsterList.size();
+		for(Unit unit : monsterList) {
+			if(unit.getCurHp() <= 0)
+				cnt--;
+		}
+		mDead = cnt;
 	}
 	
 	private void printBattle() {
-		
+		System.out.println("===============[BATTLE]===============");
+		for(Player player : party) {
+			System.out.println(player);
+		}
+		System.out.println("======================================");
+		for(Monster monster : monsterList) {
+			System.out.println(monster);
+		}
+			
+	}
+	
+	private void printParty() {
+		for(Player player : party)
+			System.out.println(player);
 	}
 	
 	@Override
 	public boolean update() {
+		if(party.size() == 0) {
+			GameManager.nextStage  = "Lobby";
+			return false;
+		}
+		
+		checkPlayer();
+		
+		if(pDead == 0) {
+			return false;
+		}
+		
 		boolean run = true;
 		boolean turn = true;
 		
+		String message = "===============["+ round + "ROUND" + "]=============== ";
+		System.out.println(message);
+		
 		while(run) {
-			printBattle();
 			if(turn) {
 				Player player = party.get(pIdx);
 				
@@ -174,8 +223,13 @@ public class StageBattle extends Stage{
 				GameManager.nextStage = "";
 			
 			checkPlayer();
-			if(mDead <= 0)
+			if(mDead == 0) {
 				um.player.addMoney(10000);
+				System.out.println("승리~~!!");
+			}else if(pDead == 0) {
+				um.player.addMoney(-5000);
+				System.out.println("아군이 전멸하였습니다.");
+			}
 			
 			if(pDead <= 0 || mDead <= 0)
 				run = false;
@@ -189,15 +243,12 @@ public class StageBattle extends Stage{
 	public void init() {
 		um.monsterList.clear();
 		um.setMonster(4);
+		monsterList = um.monsterList;
 		
-		p = um.player;
-		party = p.guild.partyList;
-		
-	    monsterList = null;
-	    monsterList = um.monsterList;
+		party = um.player.guild.partyList;
+	   
 	    mDead = monsterList.size();
 	    pDead = um.player.getGuildSize();
-		monsterList = UnitManager.monsterList;
 		
 		round ++;
 	}
