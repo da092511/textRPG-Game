@@ -15,7 +15,7 @@ public class StageTitle extends Stage{
 		frame += " +++++      ++                       \n";
 		frame += " +++++     ++++          ^^     O    \n";
 		frame += " +++++     ++++                d+b   \n";
-		frame += "  |||       ||   옷 옷 옷   *++   ㅅ   \n";
+		frame += "  |||       ||   옷 옷 옷   *++   ^   \n";
 		frame += "-------------------------------------\n";
 		frame += "\n";
 		frame +="[시작] [종료] 입력 <<< ";
