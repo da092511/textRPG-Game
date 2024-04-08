@@ -2,7 +2,7 @@ package game;
 
 public class MWolf extends Monster{
 	public MWolf() {
-		this.name = "늑대";
+		
 	}
 	
 	

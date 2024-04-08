@@ -3,7 +3,7 @@ package game;
 public class MBat extends Monster{
 	
 	public MBat() {
-		this.name = "박쥐";
+		
 	}
 	
 	@Override

@@ -2,7 +2,7 @@ package game;
 
 public class MOrc extends Monster{
 	public MOrc() {
-		this.name = "오크";
+		
 	}
 		
 	@Override
