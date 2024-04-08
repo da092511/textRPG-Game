@@ -1,24 +1,31 @@
 package game;
 
+import java.util.Scanner;
+
 public class StageLobby extends Stage{
+	public StageLobby() {
+		
+	}
+	
 	@Override
 	public void init() {
+		UnitManager.getInstance().init();
 	}
+	
 	@Override
 	public boolean update() {
 		System.out.println("[1. 전투] [2. 설정] [0. 종료]");
 		int option = inputNumber();
 		
 		if(option == 1)
-			GameManager.nextStage = "StageBattle";
+			GameManager.nextStage = "Battle";
 		else if(option == 2)
-			GameManager.nextStage = "StageSetting";
+			GameManager.nextStage = "Setting";
 		else if(option == 0)
 			GameManager.nextStage = "";
 		
 		return false;
 	}
-	
 	
 	private int inputNumber() {
 		int number = -1;

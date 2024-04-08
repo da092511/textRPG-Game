@@ -14,7 +14,7 @@ public class StageTitle extends Stage{
 		String answer = GameManager.scan.next();
 		
 		if(answer.equals("시작"))
-			GameManager.nextStage = "StageLobby";
+			GameManager.nextStage = "Lobby";
 		else if(answer.equals("종료"))
 			GameManager.nextStage = "";
 		

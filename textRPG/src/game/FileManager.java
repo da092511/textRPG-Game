@@ -18,7 +18,6 @@ public class FileManager {
 	public static void save() {
 		
 	}
-	
 
 	public static void load() {
 		

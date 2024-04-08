@@ -2,44 +2,46 @@ package game;
 
 public class Player extends Unit{
 	private int code;
-	private String name;
+	public  String name;
 	
-	private int money;
+	public static int money;
+	
+	public static boolean party;
 	
 	public static Inventory inven  = new Inventory();
 	public static Guild guild = new Guild();
 	
 	public Player() {
-		money = 100000;
-		guild.setGuild();
+		
+	}
+	
+	public Player(String name, int level, int maxhp, int att, int def, int exp) {
+	    super(name, level, maxhp, att, def, exp);
 	}
 	
 	public Player(String name, int hp, int power) {
 		super(name,hp,power);
 	}
 	
+	public int getGuildSize() {
+		return guild.getGuildSize();
+	}
+	
 	public int getCode() {
 		return this.code;
 	}
 	
-	public void init() {
-		
+	public int getMoney() {
+		return this.money;
 	}
 	
-	@Override
-	public void skill(Unit unit) {
-		if(this instanceof Warrior) { 
-			Warrior w = (Warrior) this;
-			w.skill(unit);
-		}
-		else if(this instanceof Witch) { 
-			Witch w = (Witch) this;
-			w.skill(unit);
-		}
-		else if(this instanceof Hiller) { 
-			Hiller h = (Hiller) this;
-			h.skill(unit);
-		}
+	public void addMoney(int money) {
+		this.money += money; 
+	}
+	
+	public void init() {
+		money = 200000;
+		guild.setGuild();
 	}
 	
 }

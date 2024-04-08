@@ -1,15 +1,9 @@
 package game;
 
 public class PWitch extends Player{
-	private String name;
 	
-	private int maxHp;
-	private int curHp;
-	
-	private int power;
-	
-	public PWitch(String name, int hp, int power) {
-		super(name,hp,power);
+	public PWitch() {
+		super.name = "마녀";
 	}
 	
 	@Override

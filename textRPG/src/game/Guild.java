@@ -12,7 +12,7 @@ public class Guild {
 	public static Vector<Player> partyList = new Vector<>();
 	
 	private String path = "game.";
-	private String[] type = {"Warrior", "Witch", "Hiller"};
+	private String[] type = {"PWarrior", "PWitch", "PHiller"};
 	
 	public Guild() {
 		
@@ -76,6 +76,9 @@ public class Guild {
 			Object obj = clazz.getConstructor().newInstance();
 			Player p = (Player) obj;
 			p = new Player(name, level, maxHp, power, def, exp);
+			guildList.add(p);
+			
+			System.out.println(p);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -6,9 +6,12 @@ import java.util.Vector;
 public class StageBattle extends Stage{
 	private Random ran = new Random();
 	
+	private UnitManager um = null;
+	
 	private final int PLAYER = 1;
 	private final int MONSTER = 2;
 	
+	Player p = null;
 	Vector<Player> party;
 	Vector<Monster> monsterList;
 	
@@ -17,6 +20,12 @@ public class StageBattle extends Stage{
 	
 	private int mDead;
 	private int mIdx;
+	
+	private int round;
+	
+	public StageBattle() {
+		um = UnitManager.getInstance();
+	}
 	
 	private void playerSkill(Unit unit) {
 		if(unit instanceof PWarrior) {
@@ -124,12 +133,17 @@ public class StageBattle extends Stage{
 		}
 	}
 	
+	private void printBattle() {
+		
+	}
+	
 	@Override
 	public boolean update() {
 		boolean run = true;
 		boolean turn = true;
 		
 		while(run) {
+			printBattle();
 			if(turn) {
 				Player player = party.get(pIdx);
 				
@@ -160,20 +174,31 @@ public class StageBattle extends Stage{
 				GameManager.nextStage = "";
 			
 			checkPlayer();
+			if(mDead <= 0)
+				um.player.addMoney(10000);
+			
 			if(pDead <= 0 || mDead <= 0)
 				run = false;
 		}
 		
-		GameManager.nextStage = "StrageLobby";
+		GameManager.nextStage = "Lobby";
 		return false;
 	}
 	
 	@Override
 	public void init() {
+		um.monsterList.clear();
+		um.setMonster(4);
+		
+		p = um.player;
+		party = p.guild.partyList;
+		
+	    monsterList = null;
+	    monsterList = um.monsterList;
+	    mDead = monsterList.size();
+	    pDead = um.player.getGuildSize();
 		monsterList = UnitManager.monsterList;
 		
-		pDead = party.size();
-		mDead = monsterList.size();
-		
+		round ++;
 	}
 }
