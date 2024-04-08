@@ -22,9 +22,9 @@ public class Inventory {
 	private void printItem(){
 		int n = 1;
 		for(Item item : allItems) {
-			System.out.println("======================================");
 			System.out.println(n+". "+item);
 			System.out.println("착용여부 : [" + (item.getWearing() ? "O" : "X" )+ "]");
+			System.out.println("--------------------------------------");
 			
 			if(item.getWearing()) {
 				if(item.getKind() == 1) 
@@ -88,9 +88,9 @@ public class Inventory {
 	private void takeAway() {
 		int n = 1;
 		for(Item item : wearItems) {
-			System.out.println("======================================");
 			System.out.println(n+". "+item);
 			System.out.println("착용여부 : [" + (item.getWearing() ? "O" : "X" )+ "]");
+			System.out.println("--------------------------------------");
 		}
 		System.out.println("======================================");
 		System.out.print("제거할 아이템 번호 : ");
@@ -141,6 +141,7 @@ public class Inventory {
 		while(true) {
 			printMenu();
 			int option = GameManager.inputNumber();
+			System.out.println("======================================");
 			if(option == 1) {
 				wearItem();
 			}else if(option == 2) {
