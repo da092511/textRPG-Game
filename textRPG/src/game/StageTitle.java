@@ -9,8 +9,19 @@ public class StageTitle extends Stage{
 	
 	@Override
 	public boolean update() {
-		System.out.println("[시작] [종료]");
-		System.out.print(": ");
+		String frame = "";
+		frame += "==============[TEXT RPG]=============\n\n";
+		frame += "  +++                                \n";
+		frame += " +++++      ++     (*^^*   )         \n";
+		frame += " +++++     ++++                 O    \n";
+		frame += " +++++     ++++                d+b   \n";
+		frame += "  |||       ||     옷 옷   *++   ㅅ   \n";
+		frame += "-------------------------------------\n";
+		frame += "\n";
+		frame +="[시작] [종료] 입력 <<< ";
+		
+		System.out.print(frame);
+		
 		String answer = GameManager.scan.next();
 		
 		if(answer.equals("시작"))
