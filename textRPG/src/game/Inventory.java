@@ -45,6 +45,9 @@ public class Inventory {
 		System.out.print("착용할 아이템 번호 : ");
 		int select = GameManager.inputNumber()-1;
 		
+		if(select < 0 || select >= allItems.size())
+			return;
+		
 		Item target = allItems.get(select);
 		
 		System.out.println(target);
