@@ -38,6 +38,10 @@ public class Player extends Unit{
 		this.party = !party;
 	}
 	
+	public boolean getParty() {
+		return this.party;
+	}
+	
 	public void init() {
 		money = 200000;
 		guild.setGuild();
