@@ -2,6 +2,10 @@ package game;
 
 public class PHiller extends Player{
 	
+	public PHiller() {
+		
+	}
+	
 	@Override
 	public void skill() {
 		System.out.println("[스킬 발동] 아군의 체력 +50HP");

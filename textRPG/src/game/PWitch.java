@@ -3,7 +3,7 @@ package game;
 public class PWitch extends Player{
 	
 	public PWitch() {
-		super.name = "마녀";
+		super.type = "마녀";
 	}
 	
 	@Override
