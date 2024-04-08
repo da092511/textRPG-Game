@@ -39,6 +39,46 @@ public class Inventory {
 		}
 	}
 	
-	
+	private void wearItem() {
+		printItem();
+		System.out.print("착용할 아이템 번호 : ");
+		int select = GameManager.inputNumber()-1;
+		
+		Item target = allItems.get(select);
+		
+		System.out.println(target);
+		
+		if(target.getWearing())
+			return;
+		
+		int type = target.getKind();
+		
+		if(type == 1 && weapon)
+			return;
+		else if(type == 1) {
+			weapon = !weapon;
+			target.setWearing();
+			wearItems.add(target);
+			System.out.println("착용완료");
+			return;
+		}
+		else if(type == 2 && armor)
+			return;
+		else if(type == 2) {
+			armor = !armor;
+			target.setWearing();
+			wearItems.add(target);
+			System.out.println("착용완료");
+			return;
+		}
+		else if(type == 3 && ring)
+			return;
+		else if(type == 3) {
+			ring = !ring;
+			target.setWearing();
+			wearItems.add(target);
+			System.out.println("착용완료");
+		}
+	}
 	
 }
