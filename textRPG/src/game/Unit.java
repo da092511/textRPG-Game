@@ -1,13 +1,13 @@
 package game;
 
 public abstract class Unit {
-	public static String name;
+	private String name;
+	public static String type;
 	
 	private int maxHp;
 	private int curHp;
 	private int power;
 	int level; // 레벨
-	int hp;
 	
 	int def; // 방어
 	int exp; // 경험치
@@ -28,17 +28,28 @@ public abstract class Unit {
 	public Unit(String name, int hp, int power) {
 		this.name = name;
 		this.curHp = hp;
+		this.maxHp = hp;
 		this.power = power;
 	}
 	
-	 public Unit(String name, int level, int hp, int att, int def, int exp) {
+	public void init(String name, int hp, int att) {
+		this.name = name;
+		this.curHp = hp;
+		this.maxHp = hp;
+		this.power = att;
+	}
+	
+	public void init(String name, int level, int hp, int att, int def, int exp) {
 		this.name = name;
 		this.level = level;
+		
 		this.maxHp = hp;
-		this.hp = maxHp;
+		this.curHp = maxHp;
+		
 		this.power = att;
 		this.def = def;
 		this.exp = exp;
+		
 		weapon = null;
 		armor = null;
 		ring = null;
@@ -49,13 +60,22 @@ public abstract class Unit {
 			return;
 		
 		int hp = target.getCurHp() - this.power;
+		
+		if(hp <= 0) {
+			hp = 0;
+			target.isDead = true;
+		}
+		
 		target.setCurHp(hp);
 	}
 	
 	public String getName() {
 		return this.name;
 	}
-
+	
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 	public void isDead() {
 		this.isDead = true;
@@ -121,7 +141,7 @@ public abstract class Unit {
 	
 	@Override
 	public String toString() {
-		String info = String.format("[%s] : [%4d / %4d]", this.name, this.curHp, this.maxHp);
+		String info = String.format("[%s] : [%4d / %4d]", this.name,this.curHp, this.maxHp);
 		
 		return info;
 	}
