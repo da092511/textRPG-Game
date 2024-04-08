@@ -86,8 +86,8 @@ public class Inventory {
 		int n = 1;
 		for(Item item : wearItems) {
 			System.out.println("======================================");
-			System.out.println(n+". \t"+item);
-			System.out.println("\t착용여부 : [" + (item.getWearing() ? "O" : "X" )+ "]");
+			System.out.println(n+". "+item);
+			System.out.println("착용여부 : [" + (item.getWearing() ? "O" : "X" )+ "]");
 		}
 		System.out.println("======================================");
 		System.out.print("제거할 아이템 번호 : ");
