@@ -27,7 +27,7 @@ public class Inventory {
 		return power;
 	}
 	
-	private int getShield() {
+	public int getShield() {
 		int shield = 0;
 		
 		for(Item item : wearItems) {
