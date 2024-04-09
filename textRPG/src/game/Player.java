@@ -4,6 +4,8 @@ public class Player extends Unit{
 	public String type;
 	public static int money;
 	
+	private int round =  1;
+	
 	private boolean party;
 	
 	public static Inventory inven  = new Inventory();
@@ -19,6 +21,21 @@ public class Player extends Unit{
 	}
 	
 	public void init(String name, int level, int maxHp, int att, int exp) {
+	    super.init(name, level, maxHp, att, exp);
+	}
+	
+	public void init(String name, int level,int curHp, int maxHp, int att, int exp, String type, boolean party) {
+		this.type = type;
+		this.party = party;
+		
+	    super.init(name, level, maxHp, att, exp);
+	    super.setCurHp(curHp);
+	}
+	
+	public void init(String name, int level, int maxHp, int att, int exp , int round) {
+		this.round = round;
+		this.type = type;
+		
 	    super.init(name, level, maxHp, att, exp);
 	}
 	
@@ -49,6 +66,18 @@ public class Player extends Unit{
 	public void addExp(int exp) {
 		this.exp += exp;
 		levelUp();
+	}
+	
+	public int getRound() {
+		return this.round;
+	}
+	
+	public void setRound(int round) {
+		this.round = round;
+	}
+	
+	public void addRound() {
+		this.round++;
 	}
 	
 	public void levelUp() {

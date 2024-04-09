@@ -9,7 +9,6 @@ public abstract class Unit {
 	private int power;
 	int level; // 레벨
 	
-	int def; // 방어
 	int exp; // 경험치
 	
 	private Item weapon; // 무기
@@ -39,7 +38,7 @@ public abstract class Unit {
 		this.power = att;
 	}
 	
-	public void init(String name, int level, int hp, int att, int def, int exp) {
+	public void init(String name, int level, int hp, int att, int exp) {
 		this.name = name;
 		this.level = level;
 		
@@ -47,7 +46,6 @@ public abstract class Unit {
 		this.curHp = maxHp;
 		
 		this.power = att;
-		this.def = def;
 		this.exp = exp;
 		
 		weapon = null;
@@ -56,17 +54,7 @@ public abstract class Unit {
 	}
 	
 	public void attack(Unit target, int power) {
-		if(target.getIsDead())
-			return;
 		
-		int hp = target.getCurHp() - this.power;
-		
-		if(hp <= 0) {
-			hp = 0;
-			target.isDead = true;
-		}
-		
-		target.setCurHp(hp);
 	}
 	
 	public String getName() {
@@ -137,13 +125,6 @@ public abstract class Unit {
 		this.curHp = hp;
 		this.maxHp = hp;
 		this.power = power;
-	}
-	
-	@Override
-	public String toString() {
-		String info = String.format("[%s] : [%4d / %4d]", this.name,this.curHp, this.maxHp);
-		
-		return info;
 	}
 	
 }

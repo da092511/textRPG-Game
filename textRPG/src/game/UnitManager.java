@@ -22,7 +22,7 @@ public class UnitManager {
 	int powLimt;
 	
 	public void init() {
-		player.init();
+		
 	}
 	
 	public void setMonster(int size) {

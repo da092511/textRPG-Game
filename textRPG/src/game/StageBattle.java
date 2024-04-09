@@ -51,29 +51,32 @@ public class StageBattle extends Stage{
 		}
 	}
 	
-	private boolean playerAttack(Unit unit) {
-		if(unit.getCurHp() == 0)
+	private boolean playerAttack(Player p) {
+		if(p.getIsDead())
 			return false;
 		
-		if(unit.getLeftFaint() > 0) {
+		if(p.getLeftFaint() > 0) {
 			System.err.println("기절한 상태입니다.");
 			return true;
 		}
 		
 		printBattle();
+		System.out.println("================[선택]=================\n");
+		
 		while(true) {
-			System.out.print(party.get(pIdx).getName() + " ");
+			System.out.print("["+p.getName() +"]("+p.type+ ") ");
 			System.out.print("[1.공격] [2. 스킬]  <<< ");
-			int option = inputNumber();
+			int option = inputNumber(); 
 			
-			if(option == 1 || option == 2 && unit.getSkilInterval() > 0) {
+			System.out.println("===============[ATTACK]===============");
+			if(option == 1 || option == 2 && p.getSkilInterval() > 0) {
 				int rIdx = ran.nextInt(monsterList.size());
 				
 				Unit target = monsterList.get(rIdx);
-				unit.attack(target, plusPower);
+				p.attack(target, plusPower);
 				
 			}else if(option == 2) {
-				playerSkill(unit);
+				playerSkill(p);
 			}else
 				continue;
 			
@@ -98,6 +101,8 @@ public class StageBattle extends Stage{
 	}
 	
 	private void monsterSkill(Unit unit) {
+		unit.skill();
+		
 		if(unit instanceof MOrc) {
 			int rIdx = ran.nextInt(3);
 			
@@ -180,6 +185,13 @@ public class StageBattle extends Stage{
 			System.out.println(player);
 	}
 	
+	private void checkLevel() {
+		for(Player player : party) {
+			player.addExp(30);
+			player.levelUp();
+		}
+	}
+	
 	@Override
 	public boolean update() {
 		if(party.size() == 0) {
@@ -233,6 +245,8 @@ public class StageBattle extends Stage{
 			
 			if(mDead == 0) {
 				um.player.addMoney(10000);
+				checkLevel();
+				um.player.addRound();
 				System.out.println("승리~~!!");
 			}else if(pDead == 0) {
 				um.player.addMoney(-5000);
@@ -261,6 +275,6 @@ public class StageBattle extends Stage{
 	    mDead = monsterList.size();
 	    pDead = um.player.getGuildSize();
 		
-		round ++;
+		round = um.player.getRound();
 	}
 }
