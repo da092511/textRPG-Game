@@ -27,6 +27,17 @@ public class Inventory {
 		return power;
 	}
 	
+	private int getShield() {
+		int shield = 0;
+		
+		for(Item item : wearItems) {
+			if(item.getKind() == item.ARMOR)
+				shield += item.getPower();
+		}
+		
+		return shield;
+	}
+	
 	private void printMenu() {
 		System.out.println("======================================");
 		System.out.println("[1.아이템 착용]\t[2.아이템 빼기]");
