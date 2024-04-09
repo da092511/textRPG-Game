@@ -184,6 +184,22 @@ public class Guild {
 		}
 	}
 	
+	public String getData() {
+		String info = "";
+		for(Player player : guildList) {
+			String name = player.getName();
+			int level = player.level;
+			int hp = player.getMaxHp();
+			int power = player.getPower();
+			int exp = player.exp;
+			String type = player.type;
+			String party = player.getParty() ? "true" : "false";
+			info += "/"+name+"/"+level+"/"+hp+"/"+power+"/"+exp+"/"+type+"/"+party;
+		}
+		
+		return info;
+	}
+	
 	public void run() {
 		while(true) {
 			guildMenu();
