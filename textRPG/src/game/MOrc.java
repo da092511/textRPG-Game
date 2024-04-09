@@ -16,7 +16,14 @@ public class MOrc extends Monster{
 			return;
 		
 		System.out.println("["+this.getName()+"]가 ["+ unit.getName()+"]에게 스킬 사용!");
+		
 		int power = this.getPower() * 2 - shield;
+		
+		if(power <= 0) {
+			System.out.println("방어 성공!");
+			return;
+		}
+		
 		int hp = unit.getCurHp() - power;
 		
 		if(hp <= 0) {

@@ -18,6 +18,11 @@ public class MWolf extends Monster{
 		
 		System.out.println("["+this.getName()+"]가 ["+ unit.getName()+"]에게 스킬 사용!");
 		
+		if(super.getPower()<= shield) {
+			System.out.println("방어 성공!");
+			return;
+		}
+		
 		int hp = unit.getCurHp() - this.getPower()/2 + shield;
 		
 		if(hp <= 0) {
