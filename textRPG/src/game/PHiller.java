@@ -12,7 +12,7 @@ public class PHiller extends Player{
 	}
 	
 	@Override
-	public void skill(Unit unit) {
+	public void skill(Unit unit, int power) {
 		if(unit.getIsDead())
 			return;
 		

@@ -55,7 +55,7 @@ public abstract class Unit {
 		ring = null;
 	}
 	
-	public void attack(Unit target) {
+	public void attack(Unit target, int power) {
 		if(target.getIsDead())
 			return;
 		
@@ -129,7 +129,7 @@ public abstract class Unit {
 	
 	public void skill() {}
 	
-	public void skill(Unit unit) {
+	public void skill(Unit unit, int power) {
 		
 	}
 	

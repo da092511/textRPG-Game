@@ -12,9 +12,11 @@ public class PWitch extends Player{
 	}
 	
 	@Override
-	public void skill(Unit unit) {
+	public void skill(Unit unit, int power) {
 		if(unit.getIsDead())
 			return;
+		
+		System.out.println("["+this.getName()+"]가 ["+ unit.getName()+"]에게 스킬 사용!");
 		
 		unit.isFaint(2);
 	}
