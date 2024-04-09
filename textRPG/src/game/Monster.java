@@ -31,7 +31,12 @@ public class Monster extends Unit{
 	
 	@Override
 	public String toString() {
-		String info ="[" + super.getName()+ "]" + "["+super.getCurHp()+"/"+super.getMaxHp()+"]";
+		String survive = super.getIsDead() ? "사망" : "생존";
+		String faint = super.getLeftFaint() > 0 ? "기절O"+super.getLeftFaint()+"턴": "기절X";
+ 		
+		String info = String.format("[%s]: [%4d / %4d][%s/%s]", 
+				super.getName(),super.getCurHp(), super.getMaxHp(),survive, faint);
+		
 		return info;
 	}
 }
