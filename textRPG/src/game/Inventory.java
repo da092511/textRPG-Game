@@ -144,6 +144,12 @@ public class Inventory {
 		
 		return data;
 	}
+	
+	public void putItem(Vector<Item> allItems) {
+		this.allItems = allItems;
+		setWearItems();
+	}
+	
 	public void intit() {
 		setWearItems();
 	}
