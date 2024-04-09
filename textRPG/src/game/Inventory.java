@@ -6,10 +6,6 @@ public class Inventory {
 	Vector <Item> wearItems = new Vector<>();
 	Vector <Item> allItems = new Vector<>();
 	
-	private boolean ring ;
-	private boolean weapon;
-	private boolean armor;
-	
 	public void getItem(Item item) {
 		allItems.add(item);
 	}
@@ -46,18 +42,10 @@ public class Inventory {
 	private void printItem(){
 		int n = 1;
 		for(Item item : allItems) {
+			System.out.println("--------------------------------------");
 			System.out.println(n+". "+item);
 			System.out.println("착용여부 : [" + (item.getWearing() ? "O" : "X" )+ "]");
-			System.out.println("--------------------------------------");
 			
-			if(item.getWearing()) {
-				if(item.getKind() == 1) 
-					weapon = true;
-				else if(item.getKind() == 2)
-					armor = true;
-				else if(item.getKind() == 3)
-					ring = true;
-			}
 			
 			n++;
 		}
@@ -81,32 +69,15 @@ public class Inventory {
 		
 		int type = target.getKind();
 		
-		if(type == 1 && weapon)
-			return;
-		else if(type == 1) {
-			weapon = !weapon;
-			target.setWearing();
-			wearItems.add(target);
-			System.out.println("착용완료");
-			return;
+		for(Item item : wearItems) {
+			if(target.getKind() == item.getKind())
+				return;
 		}
-		else if(type == 2 && armor)
-			return;
-		else if(type == 2) {
-			armor = !armor;
-			target.setWearing();
-			wearItems.add(target);
-			System.out.println("착용완료");
-			return;
-		}
-		else if(type == 3 && ring)
-			return;
-		else if(type == 3) {
-			ring = !ring;
-			target.setWearing();
-			wearItems.add(target);
-			System.out.println("착용완료");
-		}
+		
+		System.out.println("--------------------------------------");
+		target.setWearing();
+		wearItems.add(target);
+		System.out.println("착용완료");
 	}
 
 	private void takeAway() {
@@ -116,7 +87,7 @@ public class Inventory {
 			System.out.println("착용여부 : [" + (item.getWearing() ? "O" : "X" )+ "]");
 			System.out.println("--------------------------------------");
 		}
-		System.out.println("======================================");
+		
 		System.out.print("제거할 아이템 번호 : ");
 		int select = GameManager.inputNumber()-1;
 		
@@ -127,37 +98,11 @@ public class Inventory {
 		
 		System.out.println(target);
 		
-		if(!target.getWearing())
-			return;
-		
 		int type = target.getKind();
 		
-		if(type == 1 && !weapon)
-			return;
-		else if(type == 1) {
-			weapon = !weapon;
-			target.setWearing();
-			wearItems.add(target);
-			System.out.println("제거완료");
-			return;
-		}
-		else if(type == 2 && !armor)
-			return;
-		else if(type == 2) {
-			armor = !armor;
-			target.setWearing();
-			wearItems.add(target);
-			System.out.println("제거완료");
-			return;
-		}
-		else if(type == 3 && !ring)
-			return;
-		else if(type == 3) {
-			ring = !ring;
-			target.setWearing();
-			wearItems.add(target);
-			System.out.println("제거완료");
-		}
+		target.setWearing();
+		wearItems.add(target);
+		System.out.println("제거완료");
 			
 	}
 	
@@ -173,6 +118,34 @@ public class Inventory {
 			}else if(option == 0)
 				break;
 		}
+	}
+	
+	private void setWearItems() {
+		wearItems.clear();
+		
+		for(Item item : allItems) {
+			if(item.getWearing())
+				wearItems.add(item);
+		}
+	}
+	
+	public String getData() {
+		String data = "";
+		// itemSize/itemKind/name/power/price/wearing....
+		for(Item item : allItems) {
+			int kind = item.getKind();
+			String name = item.getName();
+			int power = item.getPower();
+			int price = item.getPrice();
+			String wearing = item.getWearing() ? "true" : "false";
+			
+			data += "/"+kind +"/"+name+"/"+power+"/"+price+"/"+wearing;
+		}
+		
+		return data;
+	}
+	public void intit() {
+		setWearItems();
 	}
 	
 }
