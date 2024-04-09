@@ -10,6 +10,8 @@ public class StageSetting extends Stage{
 
 	private Shop shop;
 	
+	private FileManager fm;
+	
 	public StageSetting() {
 		
 	}
@@ -20,6 +22,7 @@ public class StageSetting extends Stage{
 			System.out.println("======================================");
 			System.out.println("[1. 길드관리] [2. 상점] [3. 인벤토리]");
 			System.out.println("[4. 저장] [5. 로드] [0. 뒤로가기]");
+			System.out.print("menu <<< ");
 			int option = -1;
 			
 			try {
@@ -35,13 +38,14 @@ public class StageSetting extends Stage{
 			else if(option == 3) 
 				p.inven.run();
 			else if(option == 4)
-				FileManager.save();
+				fm.save();
 			else if(option == 5)
-				FileManager.load();
+				fm.load();
 			else if(option == 0) {
 				GameManager.nextStage = "Lobby";
 				break;
 			}
+			um.player.init();
 		}
 		
 		return false;
@@ -64,7 +68,9 @@ public class StageSetting extends Stage{
 	@Override
 	public void init() {
 		um = UnitManager.getInstance();
+		um.player.init();
 		shop = new Shop();
+		fm = new FileManager();
 	}
 	
 }

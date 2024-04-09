@@ -22,12 +22,13 @@ public class Guild {
 		 System.out.println("=============== [길드관리] ================");
 	     System.out.println("[1.길드 목록]\t[2.길드원 추가]\t[3.길드원 삭제]");
 	     System.out.println("[4.파티원 교체]\t[5.파티추가]\t[6.파티목록]");
-	     System.out.println("[0.뒤로가기]");;
+	     System.out.println("[0.뒤로가기]");
+	     System.out.print("menu <<< ");
 	}
 	
 	public void setGuild() {
 		if(guildList == null || guildList.size() < 3) {
-			System.out.println("길드원을 추가하세요");
+			System.err.println("길드원을 추가하세요");
 			return;
 		}
 		
@@ -64,13 +65,12 @@ public class Guild {
 		name += name3[rIdx];
 		
 		//레벨
-		int level = ran.nextInt(5)+1;
+		int level = ran.nextInt(3)+1;
 		//hp
-		int maxHp = 80 * level;
+		int maxHp = 100 * level;
 		//power
 		int power = 40 + 5 * level;
 		
-		int def = 0; //방어
 		int exp = 0;
 		
 		rIdx = ran.nextInt(3);
@@ -80,7 +80,7 @@ public class Guild {
 			Object obj = clazz.getConstructor().newInstance();
 			Player temp = (Player) obj;
 			
-			temp.init(name,level,maxHp,power, def, exp);
+			temp.init(name,level,maxHp,power, exp);
 			
 			if(partyList.size() < PARTY_SIZE)
 				temp.setParty();
@@ -99,7 +99,8 @@ public class Guild {
 		int n = 1;
 		
 		for(Player p : guildList) {
-			System.out.print(n + ". ");
+			String number = String.format("%2d",n);
+			System.out.print(number + ". ");
 			System.out.println(p);
 			n++;
 		}
@@ -107,7 +108,7 @@ public class Guild {
 	
 	private void delectUnit() {
 		printGuild();
-		System.out.println("삭제할 유저 번호");
+		System.out.println("삭제할 유저 번호 <<< ");
 		int index = GameManager.inputNumber()-1;
 		
 		if(index < 0 || index >= guildList.size())
@@ -120,18 +121,19 @@ public class Guild {
 		int n = 1;
 		System.out.println("=============== [현재 파티] ===============");
 		for(Player p : partyList) {
-			System.out.println(n + ". " + p);
+			String number = String.format("%2d",n);
+			System.out.println(number + ". " + p);
 			n++;
 		}
 	}
 	
 	private void printType(Player p) {
 		if(p instanceof PWarrior) {
-			System.out.print("전사");
+			p.type = "전사";
 		}else if(p instanceof PWitch) {
-			System.out.print("마녀");
+			p.type = "마녀";
 		}else if(p instanceof PHiller) {
-			System.out.print("힐러");
+			p.type = "힐러";
 		}else
 			System.out.println("빕-");
 	}
@@ -141,14 +143,14 @@ public class Guild {
 			return;
 		
 		printParty();
-		System.out.print("교체될 플레이어 번호 : ");
+		System.out.print("교체될 플레이어 번호 <<< ");
 		int outIdx = GameManager.inputNumber()-1;
 		
 		if(outIdx < 0 || outIdx >= partyList.size())
 			return;
-		
+		System.out.println("================ [길드] ================");
 		printGuild();
-		System.out.print("교체할 플레이어 번호");
+		System.out.print("교체할 플레이어 번호 <<< ");
 		int inIdx = GameManager.inputNumber()-1;
 		
 		if(inIdx < 0 || inIdx >= guildList.size() || guildList.get(inIdx).getParty())
@@ -164,7 +166,7 @@ public class Guild {
 			return;
 		
 		printGuild();
-		System.out.print("파티에 추가할 플레이어 번호");
+		System.out.print("파티에 추가할 플레이어 번호 <<< ");
 		int index = GameManager.inputNumber()-1;
 		
 		if(index < 0 || index >= guildList.size() || guildList.get(index).getParty())
@@ -176,7 +178,8 @@ public class Guild {
 	public void printPartyList() {
 		int n= 1;
 		for(Player p : partyList) {
-			System.out.println(n+". "+p);
+			String number = String.format("%2d",n);
+			System.out.println(number+". "+p);
 			n++;
 		}
 	}

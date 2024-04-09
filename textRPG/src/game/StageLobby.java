@@ -16,6 +16,7 @@ public class StageLobby extends Stage{
 	public boolean update() {
 		System.out.println("======================================");
 		System.out.println("[1. 전투] [2. 설정] [0. 종료]");
+		System.out.print("menu <<< ");
 		int option = inputNumber();
 		
 		if(option == 1)

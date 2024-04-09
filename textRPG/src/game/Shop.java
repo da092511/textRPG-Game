@@ -4,6 +4,7 @@ import java.awt.event.ItemListener;
 import java.util.Vector;
 
 public class Shop {
+	private Player p ;
 	private Vector <Item> itemList = new Vector<>();
 	
 	public Shop() {
@@ -71,55 +72,64 @@ public class Shop {
 	    itemList.add(temp);
 	}
 	
-	public void weapon() {
+	public void printItem(int type) {
 		int n = 1;
+		System.out.println("======================================");
 		for(Item item : itemList)
-			if(item.getKind() == item.WEAPON) {
-				System.out.println("-------------------");
+			if(item.getKind() == type) {
 				System.out.println(n + ". " +item);
-				System.out.println("-------------------");
+				System.out.println("--------------------------------------");
 				n++;
 			}
 	}
 	
-	public void armor() {
-		int n = 1;
-		for(Item item : itemList)
-			if(item.getKind() == item.ARMOR) {
-				System.out.println("-------------------");
-				System.out.println(n + ". " +item);
-				System.out.println("-------------------");
+	private void buyItem(int type) {
+		System.out.println("현재 골드: "+ p.getMoney()+"G");
+		System.out.println("구입할 상품번호 : ");
+		int select = GameManager.inputNumber()-1;
+		
+		Item target = null;
+		
+		int n = 0;
+		for(int i=0;i<itemList.size();i++) {
+			Item item = itemList.get(i);
+			if(item.getKind() == type) {
+				if(n == select) {
+					target = item;
+					break;
+				}
 				n++;
 			}
-	}
-	
-	public void ring() {
-		int n = 1;
-		for(Item item : itemList)
-			if(item.getKind() == item.RING) {
-				System.out.println("-------------------");
-				System.out.println(n + ". " +item);
-				System.out.println("-------------------");
-				n++;
-			}
+		}
+		
+		if(target == null)
+			return;
+		
+		int price = target.getPrice();
+		
+		if(p.getMoney() < price) {
+			System.err.println("돈이 부족합니다.");
+			return;
+		}
+		System.out.println("======================================");
+		System.out.println(target.getName()+" 구입");
+		p.addMoney(-price);
+		p.inven.getItem(target);
 	}
 	
 	public void run() {
 		while(true) {
+			p = UnitManager.getInstance().player;
+			System.out.println("======================================");
 			System.out.println("[1.무기] [2.갑옷] [3.반지] [0.뒤로가기]");
 			int option = GameManager.inputNumber();
 			
-			if(option == 1) 
-				weapon();
-			else if(option == 2)
-				armor();
-			else if(option == 3)
-				ring();
-			else if(option == 0)
+			if(option == 0)
 				break;
 			
-			
-			
+			printItem(option);
+			buyItem(option);
+			System.out.println("현재 골드: "+ p.getMoney()+"G");
 		}
 	}
 }
