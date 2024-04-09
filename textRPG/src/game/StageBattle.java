@@ -14,6 +14,9 @@ public class StageBattle extends Stage{
 	Vector<Player> party;
 	Vector<Monster> monsterList;
 	
+	private int plusPower;
+	private int plusShield;
+	
 	private int pIdx;
 	private int pDead;
 	
@@ -24,6 +27,10 @@ public class StageBattle extends Stage{
 	
 	public StageBattle() {
 		um = UnitManager.getInstance();
+	}
+	
+	private void setRound(int num) {
+		this.round = round;
 	}
 	
 	private void playerSkill(Unit unit) {
@@ -56,7 +63,7 @@ public class StageBattle extends Stage{
 		printBattle();
 		while(true) {
 			System.out.print(party.get(pIdx).getName() + " ");
-			System.out.println("[1.공격] [2. 스킬]");
+			System.out.print("[1.공격] [2. 스킬]  <<< ");
 			int option = inputNumber();
 			
 			if(option == 1 || option == 2 && unit.getSkilInterval() > 0) {
@@ -223,6 +230,7 @@ public class StageBattle extends Stage{
 				GameManager.nextStage = "";
 			
 			checkPlayer();
+			
 			if(mDead == 0) {
 				um.player.addMoney(10000);
 				System.out.println("승리~~!!");
@@ -247,6 +255,8 @@ public class StageBattle extends Stage{
 		
 		party = um.player.guild.partyList;
 	   
+		plusPower = um.player.inven.getPower();
+		plusShield = um.player.inven.getShield();
 	    mDead = monsterList.size();
 	    pDead = um.player.getGuildSize();
 		
