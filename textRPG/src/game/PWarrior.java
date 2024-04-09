@@ -15,7 +15,7 @@ public class PWarrior extends Player{
 		if(unit.getIsDead())
 			return;
 		
-		System.out.println("["+this.getName()+"]가 ["+ unit.getName()+"]에게 스킬 사용!");
+		System.out.println("["+this.getName()+"]이 ["+ unit.getName()+"]에게 스킬 사용!");
 		
 		int hp = unit.getCurHp() - this.getPower() - power;
 		
