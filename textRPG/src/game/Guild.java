@@ -189,15 +189,21 @@ public class Guild {
 		for(Player player : guildList) {
 			String name = player.getName();
 			int level = player.level;
-			int hp = player.getMaxHp();
+			int curHp = player.getCurHp();
+			int maxHp = player.getMaxHp();
 			int power = player.getPower();
 			int exp = player.exp;
 			String type = player.type;
 			String party = player.getParty() ? "true" : "false";
-			info += "/"+name+"/"+level+"/"+hp+"/"+power+"/"+exp+"/"+type+"/"+party;
+			info += "/"+name+"/"+level+"/"+curHp+"/"+maxHp+"/"+power+"/"+exp+"/"+type+"/"+party;
 		}
 		
 		return info;
+	}
+	
+	public void putGuild(Vector<Player> guildList) {
+		this.guildList = guildList;
+		setGuild();
 	}
 	
 	public void run() {
