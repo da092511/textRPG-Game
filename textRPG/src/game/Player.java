@@ -45,5 +45,29 @@ public class Player extends Unit{
 	public void init() {
 		money = 200000;
 	}
+
+	@Override
+	public void attack(Unit target, int power) {
+		if(target.getIsDead())
+			return;
+		
+		System.out.println("["+super.getName()+"]가 ["+ target.getName()+"]을 공격!");
+		
+		int hp = target.getCurHp() - super.getPower() - power;
+		
+		if(hp <= 0) {
+			hp = 0;
+			target.isDead();
+			System.err.println("["+target.getName()+"]가 사망하였습니다.");
+		}
+		
+		target.setCurHp(hp);
+	}
+	
+	@Override
+	public String toString() {
+		String info = String.format("[%s](%s): [%4d / %4d]", super.getName(),this.type,super.getCurHp(), super.getMaxHp());
+		return super.toString();
+	}
 	
 }
