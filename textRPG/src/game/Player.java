@@ -11,15 +11,15 @@ public class Player extends Unit{
 	
 	
 	public Player() {
-		
+		money = 200000;
 	}
 	
 	public Player(String name, int maxHp, int att) {
 		super(name, maxHp, att);
 	}
 	
-	public void init(String name, int level, int maxHp, int att, int def, int exp) {
-	    super.init(name, level, maxHp, att, def, exp);
+	public void init(String name, int level, int maxHp, int att, int exp) {
+	    super.init(name, level, maxHp, att, exp);
 	}
 	
 	public int getGuildSize() {
@@ -42,8 +42,25 @@ public class Player extends Unit{
 		return this.party;
 	}
 	
+	public void setExp(int exp) {
+		this.exp = exp;
+	}
+	
+	public void addExp(int exp) {
+		this.exp += exp;
+		levelUp();
+	}
+	
+	public void levelUp() {
+		if(this.exp < 100)
+			return;
+		
+		this.exp -= 100;
+		this.level ++;
+	}
+	
 	public void init() {
-		money = 200000;
+		guild.setGuild();
 	}
 
 	@Override
@@ -51,9 +68,10 @@ public class Player extends Unit{
 		if(target.getIsDead())
 			return;
 		
-		System.out.println("["+super.getName()+"]가 ["+ target.getName()+"]을 공격!");
+		int hit = power + super.getPower();
+		System.out.println("["+super.getName()+"]가 ["+ target.getName()+"]을 공격! +"+hit+"데미지");
 		
-		int hp = target.getCurHp() - super.getPower() - power;
+		int hp = target.getCurHp() - hit;
 		
 		if(hp <= 0) {
 			hp = 0;
@@ -63,11 +81,9 @@ public class Player extends Unit{
 		
 		target.setCurHp(hp);
 	}
-	
 	@Override
 	public String toString() {
 		String info = String.format("[%s](%s): [%4d / %4d]", super.getName(),this.type,super.getCurHp(), super.getMaxHp());
-		return super.toString();
+		return info;
 	}
-	
 }

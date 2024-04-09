@@ -26,4 +26,10 @@ public class PHiller extends Player{
 		
 		unit.setCurHp(hp);
 	}
+	
+	@Override
+	public String toString() {
+		String info = String.format("[%s](%s): [%4d / %4d]", super.getName(),this.type,super.getCurHp(), super.getMaxHp());
+		return info;
+	}
 }

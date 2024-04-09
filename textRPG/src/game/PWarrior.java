@@ -15,9 +15,11 @@ public class PWarrior extends Player{
 		if(unit.getIsDead())
 			return;
 		
-		System.out.println("["+this.getName()+"]이 ["+ unit.getName()+"]에게 스킬 사용!");
+		int hit = power + super.getPower();
 		
-		int hp = unit.getCurHp() - this.getPower() - power;
+		System.out.println("["+this.getName()+"]이 ["+ unit.getName()+"]에게 스킬 사용! +"+hit+"데미지");
+		
+		int hp = unit.getCurHp() - hit;
 		
 		if(hp <= 0) {
 			hp = 0;
@@ -26,5 +28,11 @@ public class PWarrior extends Player{
 		}
 		
 		unit.setCurHp(hp);;
+	}
+	
+	@Override
+	public String toString() {
+		String info = String.format("[%s](%s): [%4d / %4d]", super.getName(),this.type,super.getCurHp(), super.getMaxHp());
+		return info;
 	}
 }	

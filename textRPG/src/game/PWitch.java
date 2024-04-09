@@ -20,5 +20,11 @@ public class PWitch extends Player{
 		
 		unit.isFaint(2);
 	}
+	
+	@Override
+	public String toString() {
+		String info = String.format("[%s](%s): [%4d / %4d]", super.getName() ,this.type,super.getCurHp(), super.getMaxHp());
+		return info;
+	}
 
 }
