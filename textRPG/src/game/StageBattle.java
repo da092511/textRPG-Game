@@ -37,17 +37,17 @@ public class StageBattle extends Stage{
 		if(unit instanceof PWarrior) {
 			PWarrior w = (PWarrior) unit;
 			for(Monster mon : monsterList)
-				w.skill(mon);
+				w.skill(mon,plusPower);
 			
 		}else if(unit instanceof PWitch) {
 			PWitch w = (PWitch) unit;
 			for(Monster mon : monsterList)
-				w.skill(mon);
+				w.skill(mon,plusPower);
 			
 		}else if(unit instanceof PHiller) {
 			PHiller h = (PHiller) unit;
 			for(Player p : party)
-				h.skill(p);
+				h.skill(p,plusPower);
 		}
 	}
 	
@@ -70,7 +70,7 @@ public class StageBattle extends Stage{
 				int rIdx = ran.nextInt(monsterList.size());
 				
 				Unit target = monsterList.get(rIdx);
-				unit.attack(target);
+				unit.attack(target, plusPower);
 				
 			}else if(option == 2) {
 				playerSkill(unit);
@@ -102,18 +102,18 @@ public class StageBattle extends Stage{
 			int rIdx = ran.nextInt(3);
 			
 			MOrc orc = (MOrc) unit;
-			orc.skill(party.get(rIdx));
+			orc.skill(party.get(rIdx), plusShield);
 		}
 		else if(unit instanceof MWolf) {
 			MWolf wolf = (MWolf) unit;
 			for(Player p : party)
-				wolf.skill(p);
+				wolf.skill(p, plusShield);
 		}
 		else if(unit instanceof MBat) {
 			int rIdx = ran.nextInt(3);
 			
 			MBat bat = (MBat) unit;
-			bat.skill(party.get(rIdx));
+			bat.skill(party.get(rIdx), plusShield);
 		}
 	}
 	
@@ -123,7 +123,7 @@ public class StageBattle extends Stage{
 		if(attack != 1 || attack == 1 && unit.getSkilInterval() > 0) {
 			int index = ran.nextInt(party.size());
 			
-			unit.attack(party.get(index));
+			unit.attack(party.get(index), plusShield);
 		}
 		else if(attack == 1) {
 		//	monsterSkill(unit);
@@ -257,6 +257,7 @@ public class StageBattle extends Stage{
 	   
 		plusPower = um.player.inven.getPower();
 		plusShield = um.player.inven.getShield();
+		
 	    mDead = monsterList.size();
 	    pDead = um.player.getGuildSize();
 		
